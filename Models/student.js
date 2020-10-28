@@ -14,6 +14,40 @@ const studentSchema = new Schema({
     type: String,
     required: true
   },
+  semseter:
+  {
+      type:Number,
+      required:true
+  },
+  cgpa:
+  {
+      type:String,
+      required:true
+  },
+  tenthPercentage:
+  {
+      type:String,
+      required:true
+  },
+  twelthPercentage:
+  {
+      type:String,
+      required:true
+  },
+  address:
+  {
+      type:String,
+  },
+  resume:
+  {
+      type:String
+  }
+
+
+
+
+  
+
   
 });
 

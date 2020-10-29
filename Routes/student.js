@@ -60,7 +60,7 @@ Router.post('/',async(req,res,next)=>
 
     try
     {
-        const newSubscriber = await student.save();
+        const newStudent = await student.save();
         res.status(201).json(newSubscriber)
     }
     catch(err)

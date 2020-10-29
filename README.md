@@ -3,7 +3,7 @@ A Backend Service for a placement portal website
 
 steps for installation: 
 
-1) Clone the installation file
+1) Clone the Repository using git clone
 
 2) Add the MongoDb atlas Url 
 

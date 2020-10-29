@@ -12,9 +12,10 @@ db.once('open',()=>{ console.log('Connected to the DataBase')});
 app.use(express.json());
 
 const studentRouter = require('./Routes/student');
+const companyRouter = require('./Routes/company');
 
 app.use('/students',studentRouter);
-
+app.use('/companies',companyRouter);
 app.listen(3000, ()=>{console.log('server has started')});
 
 //middlewares

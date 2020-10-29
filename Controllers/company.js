@@ -11,3 +11,22 @@ exports.getCompanies = async(req,res,next)=>
 
     }
 }
+
+exports.getCompany = async(req,res,next)=>
+{
+    try{
+        const company = await Company.findById(req.params.id);
+        if(company==null)
+        {
+            res.status(404).json({message:'Could not find the Company'});
+
+        }
+        res.json(company);
+
+    }
+    catch(err)
+    {
+        res.status(500).json({message:err.message});
+
+    }
+}

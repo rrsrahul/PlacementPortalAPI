@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+/*
 const studentSchema = new Schema({
   email: {
     type: String,
@@ -43,12 +43,14 @@ const studentSchema = new Schema({
       type:String
   }
 
-
-
-
   
+});*/
 
-  
-});
+const studentSchema = new Schema({
+  name:{
+    type:String,
+    required:true
+  }
+})
 
 module.exports = mongoose.model('Student', studentSchema);

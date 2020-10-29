@@ -9,6 +9,12 @@ const db = mongoose.connection;
 db.on('error',(err)=>{console.log(err)});
 db.once('open',()=>{ console.log('Connected to the DataBase')});
 
+app.use(express.json());
+
+const studentRouter = require('./Routes/student');
+
+app.use('/students',studentRouter);
+
 app.listen(3000, ()=>{console.log('server has started')});
 
 //middlewares

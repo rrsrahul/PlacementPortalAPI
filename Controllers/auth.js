@@ -1,6 +1,7 @@
 const Student = require('../Models/student');
 const bcrypt = require('bcryptjs');
-const { load } = require('dotenv/types');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 exports.signup = async(req,res,next)=>
 {
@@ -34,7 +35,8 @@ exports.login = async(req,res,next)=>
     let loadedStudent;
     try
     {
-        const student = await Student.find({email:email});
+        const student = await Student.findOne({email:email});
+        console.log(!student);
         if(!student)
         {
             res.status(404).json({message:'Could not Find User'});
@@ -51,7 +53,7 @@ exports.login = async(req,res,next)=>
                 email:email,
                 userId:loadedStudent._id.toString()
             },
-            'supersupersecretkey',
+            process.env.SECRET,
             {expiresIn: '1h' }
 
         );

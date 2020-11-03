@@ -5,7 +5,7 @@ steps for installation:
 
 1) Clone the Repository using git clone
 
-2) Add the MongoDb atlas Url 
+2) Add the MongoDb atlas Url in the app.js file
 
 3) In the terminal hit npm install 
 

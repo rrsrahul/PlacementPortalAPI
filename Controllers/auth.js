@@ -1,6 +1,6 @@
 const Student = require('../Models/student');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');+
 require('dotenv').config();
 
 exports.signup = async(req,res,next)=>
@@ -18,7 +18,7 @@ try
     })
 
     const result = await student.save();
-    res.status(201).json({message:'Student Created',...result});
+    res.status(201).json({message:'Student Created',name:result.name});
 
 }
 catch(err)

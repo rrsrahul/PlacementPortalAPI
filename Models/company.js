@@ -7,6 +7,19 @@ const companySchema = new Schema({
         type:String,
         required:true
     },
+    date:
+    {
+        type:Date
+    },
+    jd:
+    {
+        type:String
+    },
+    package:
+    {
+        type:String
+    }
+    
 })
 
 module.exports = mongoose.model('Company',companySchema);

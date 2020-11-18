@@ -61,7 +61,7 @@ Router.post('/',async(req,res,next)=>
     try
     {
         const newStudent = await student.save();
-        res.status(201).json(newSubscriber)
+        res.status(201).json(newStudent)
     }
     catch(err)
     {

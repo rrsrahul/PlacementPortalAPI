@@ -58,7 +58,32 @@ const studentSchema = new Schema({
   password:
   {
     type:String
-  }
+  },
+  cgpa:
+  {
+    type:String
+  },
+  branch:
+  {
+    type:String
+  },
+  year:
+  {
+    type:Number
+  },
+  address:
+  {
+    type:String
+  },
+  phone:
+  {
+    type:String
+  },
+  resume:
+  {
+    type:URL
+  },
+
 })
 
 module.exports = mongoose.model('Student', studentSchema);

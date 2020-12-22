@@ -35,7 +35,15 @@ mongoose.connect(process.env.DATABASE_URL).then((result)=>
 
 */
 
-
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'OPTIONS, GET, POST, PUT, PATCH, DELETE'
+    );
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
 
 //Routing 
 
@@ -44,7 +52,7 @@ app.use('/companies',companyRouter);
 app.use('/admin',authRouter);
 
 
-app.listen(3000, ()=>{console.log('server has started')});
+app.listen(8080, ()=>{console.log('server has started')});
 
 
 

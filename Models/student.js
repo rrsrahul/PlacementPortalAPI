@@ -78,11 +78,7 @@ const studentSchema = new Schema({
   phone:
   {
     type:String
-  },
-  resume:
-  {
-    type:URL
-  },
+  }
 
 })
 

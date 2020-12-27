@@ -29,7 +29,10 @@ exports.getCompany = async(req,res,next)=>
     }
     catch(err)
     {
-        res.status(500).json({message:err.message});
+        if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
 
     }
 }
@@ -49,7 +52,10 @@ exports.createCompany = async(req,res,next)=>
     }
     catch(err)
     {
-        res.status(400).json({message:err.message});
+        if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
     }
 
 }
@@ -71,7 +77,10 @@ exports.updateCompany = async(req,res,next)=>
     }
     catch(err)
     {
-        res.status(500).json({message:err.message});
+        if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
     }
 
 }
@@ -94,6 +103,9 @@ exports.deleteCompany = async(req,res,next)=>
     }
     catch(err)
     {
-        res.status(500).json({message:err.message});
+        if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
     }
 }

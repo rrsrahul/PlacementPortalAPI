@@ -6,7 +6,7 @@ require('dotenv').config();
 exports.signup = async(req,res,next)=>
 {
     const email = req.body.email;
-    const name = req.body.name;
+    const name = req.body.name || 'Rahul';
     const password = req.body.password;
 try
 {
@@ -23,7 +23,10 @@ try
 }
 catch(err)
 {
-    return res.json({message:err.message});
+    if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
 }
    
 }
@@ -63,6 +66,9 @@ exports.login = async(req,res,next)=>
     }
     catch(err)
     {
-        res.status(500).json({message:err.message});
+        if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
     }
 }

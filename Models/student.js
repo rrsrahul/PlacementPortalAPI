@@ -67,10 +67,6 @@ const studentSchema = new Schema({
   {
     type:String
   },
-  year:
-  {
-    type:Number
-  },
   address:
   {
     type:String
@@ -78,7 +74,28 @@ const studentSchema = new Schema({
   phone:
   {
     type:String
+  },
+  tenthMarks:{
+    type:String
+  },
+  twelfthMarks:{
+    type:String
+  },
+  dob:{
+    type:String
+  },
+  gender:{
+    type:String
+  },
+  diplomaPercentage:{
+    type:String
+  },
+  semester:
+  {
+      type:Number,
+      required:true
   }
+
 
 })
 

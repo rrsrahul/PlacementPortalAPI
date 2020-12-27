@@ -55,7 +55,19 @@ Router.get('/:id',getStudent,(req,res,next)=>
 Router.post('/',async(req,res,next)=>
 {
     const student = new Student({
-        name:req.body.name
+        name:req.body.name,
+        email:req.body.name,
+        password:req.body.password,
+        cgpa:req.body.cgpa,
+        branch:req.body.branch,
+        address:req.body.address,
+        phone:req.body.phone,
+        tenthMarks:req.body.tenthMarks,
+        twelfthMarks:req.body.twelfthMarks,
+        dob:req.body.dob,
+        gender:req.body.gender,
+        diplomaPercentage:req.body.diplomaPercentage,
+        semester:req.body.semseter
     })
 
     try

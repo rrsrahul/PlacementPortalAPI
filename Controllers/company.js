@@ -41,9 +41,13 @@ exports.createCompany = async(req,res,next)=>
 {
     const company = new Company({
         name:req.body.name,
+        eligibility:req.body.eligibility,
+        ctc:req.body.ctc,
         date:req.body.date,
         jd:req.body.jd,
-        package:req.body.package
+        internship:req.body.internship,
+        jobLocation:req.body.jobLocation,
+        additionalInformation:req.body.additionalInformation
     })
     try{
         const newCompany = await company.save();

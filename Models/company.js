@@ -7,6 +7,20 @@ const companySchema = new Schema({
         type:String,
         required:true
     },
+    eligibility:{
+        type:String,
+        required:true
+    },
+    ctc:{
+        type:String,
+    },
+    internship:{
+        type:String
+    },
+    jobLocation:{
+        type:String
+    },
+
     date:
     {
         type:Date
@@ -15,8 +29,7 @@ const companySchema = new Schema({
     {
         type:String
     },
-    package:
-    {
+    additionalInformation:{
         type:String
     }
     

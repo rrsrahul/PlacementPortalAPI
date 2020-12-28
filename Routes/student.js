@@ -21,7 +21,9 @@ const getStudent = async(req,res,next)=>
     catch(err)
     {
         //console.log(err);
+        console.log('In get student')
         return res.status(500).json({message:err.message})
+        
 
     }
     res.student = student;
@@ -51,45 +53,21 @@ Router.get('/:id',getStudent,(req,res,next)=>
     res.json(res.student);
 })
 
-//Creating 1
-Router.post('/',async(req,res,next)=>
-{
-    const student = new Student({
-        name:req.body.name,
-        email:req.body.name,
-        password:req.body.password,
-        cgpa:req.body.cgpa,
-        branch:req.body.branch,
-        address:req.body.address,
-        phone:req.body.phone,
-        tenthMarks:req.body.tenthMarks,
-        twelfthMarks:req.body.twelfthMarks,
-        dob:req.body.dob,
-        gender:req.body.gender,
-        diplomaPercentage:req.body.diplomaPercentage,
-        semester:req.body.semseter
-    })
-
-    try
-    {
-        const newStudent = await student.save();
-        res.status(201).json(newStudent)
-    }
-    catch(err)
-    {
-        res.status(400).send({err:err.message})
-
-    }
-    
-})
-
 //Updating 1
-Router.patch('/:id',getStudent,async(req,res,next)=>
+Router.post('/:id',getStudent,async(req,res,next)=>
 {
-    if(req.body.name!=null)
-    {
-        res.student.name = req.body.name;
-    }
+    res.student.name =req.body.name
+    res.student.cgpa=req.body.cgpa,
+    res.student.branch=req.body.branch,
+    res.student.address=req.body.address,
+    res.student.phone=req.body.phone,
+    res.student.tenthMarks=req.body.tenthMarks,
+    res.student.twelfthMarks=req.body.twelfthMarks,
+    res.student.dob=req.body.dob,
+    res.student.gender=req.body.gender,
+    res.student.diplomaPercentage=req.body.diplomaPercentage,
+    res.student.semester=req.body.semseter
+
 
     try
     {
@@ -98,7 +76,8 @@ Router.patch('/:id',getStudent,async(req,res,next)=>
     }
     catch(err)
     {
-        res.json(500).json({message:err.message});
+        console.log(err);
+        res.status(500).json({message:err.message});
     }
     
 })

@@ -93,7 +93,7 @@ const studentSchema = new Schema({
   semester:
   {
       type:Number,
-      required:true
+      
   }
 
 

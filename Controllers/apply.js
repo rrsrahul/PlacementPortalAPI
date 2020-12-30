@@ -25,3 +25,23 @@ exports.applyCompany = async(req,res,next)=>
 
 }
 
+exports.getStudents = async(req,res,next)=>
+{
+    const companyName = req.query.name
+    
+    try
+    {
+        console.log(companyName)
+       const result = await Applied.find({name:companyName})
+       console.log(result)
+       res.send(result);
+      // const result2 = await Applied.find()
+       //console.log(result2)
+       //res.status(201).json({})
+    }
+    catch(err)
+    {
+        console.log(err)
+    }
+   
+}

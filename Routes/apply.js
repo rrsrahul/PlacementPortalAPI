@@ -1,0 +1,11 @@
+const express = require('express')
+
+const Router = express.Router();
+const applyController = require('../Controllers/apply');
+
+//Apply
+Router.post('/',applyController.applyCompany)
+
+
+
+module.exports = Router;

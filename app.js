@@ -13,6 +13,7 @@ app.use(express.json());
 const studentRouter = require('./Routes/student');
 const companyRouter = require('./Routes/company');
 const authRouter = require('./Routes/auth');
+const applyRouter = require('./Routes/apply');
 
 //Set The Application with these middlewares
 
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 app.use('/students',studentRouter);
 app.use('/companies',companyRouter);
 app.use('/admin',authRouter);
+app.use('/apply',applyRouter);
 
 app.use((error, req, res, next) => {
   console.log(error);

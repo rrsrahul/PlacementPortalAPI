@@ -10,6 +10,15 @@ exports.signup = async(req,res,next)=>
     const password = req.body.password;
 try
 {
+
+    const st = await Student.findOne({email:req.body.email})
+    if(st)
+    {
+        const error = new Error('A User with this username already exists');
+        error.statusCode = 401;    
+        throw error;
+    }
+
     const hashedpw = await bcrypt.hash(password,12);
     const student = new Student({
         name:name,

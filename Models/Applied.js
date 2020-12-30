@@ -9,6 +9,9 @@ const appliedSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref:'Student',
         required:true
+    },
+    position:{
+        type:String
     }
 })
 

@@ -31,6 +31,9 @@ const companySchema = new Schema({
     },
     additionalInformation:{
         type:String
+    },
+    position:{
+        type:String
     }
     
 })

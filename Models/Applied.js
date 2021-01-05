@@ -16,4 +16,6 @@ const appliedSchema = mongoose.Schema({
 })
 
 
+
+
 module.exports = mongoose.model('Applied', appliedSchema);

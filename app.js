@@ -38,6 +38,8 @@ mongoose.connect(process.env.DATABASE_URL).then((result)=>
 
 */
 
+
+//Adding static serving on images
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path')
 const mongoose = require('mongoose');
 const app = express();
 var cors = require('cors');
@@ -18,7 +19,7 @@ const applyRouter = require('./Routes/apply');
 //Set The Application with these middlewares
 
 app.use(bodyParser.json());
-
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 mongoose.connect(process.env.DATABASE_URL,{ useNewUrlParser: true ,  useUnifiedTopology: true });
 const db = mongoose.connection;

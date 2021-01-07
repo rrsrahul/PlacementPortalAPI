@@ -2,6 +2,8 @@ const Applied = require('../Models/Applied');
 const Company = require('../Models/company');
 const Student = require('../Models/student');
 const mongoose = require('mongoose');
+const { json } = require('body-parser');
+const { findOneAndRemove } = require('../Models/Applied');
 require('dotenv').config();
 
 exports.applyCompany = async(req,res,next)=>
@@ -62,7 +64,7 @@ exports.getStudents = async(req,res,next)=>
     
     try
     {
-        console.log(companyName)
+        //console.log(companyName)
        const result = await Applied.find({name:companyName,position:position}).populate()
       
        res.send(result);
@@ -77,4 +79,56 @@ exports.getStudents = async(req,res,next)=>
         next(err)
     }
    
+}
+
+exports.removeCompany = async(req,res,next)=>
+{
+    const compName = req.body.compName;
+    const userId = mongoose.Types.ObjectId(req.body.id)
+    const position = req.body.position
+    console.log(compName);
+    try
+    {
+         const result = await Applied.findOneAndDelete({name:compName,id:userId,position:position})
+         console.log(result)
+
+            if(!result)
+            {
+                const error = new Error('Cannot Withdraw');
+                error.statusCode = 500;    
+                throw error;
+            }
+            res.json({message:'Company Withdrawn'})
+    }
+    catch(err)
+    {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
+    }
+
+}
+
+exports.getCompanies = async(req,res,next)=>
+{
+    const userId = mongoose.Types.ObjectId(req.query.userId)
+    console.log(userId)
+
+    try
+    {
+        const companies = await Applied.find({id:userId})
+        if(companies==null)
+        {
+            res.json({})
+        }
+
+        res.json(companies)
+    }
+    catch(err)
+    {
+
+    }
+
+
 }

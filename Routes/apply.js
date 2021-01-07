@@ -10,6 +10,8 @@ Router.post('/',applyController.applyCompany)
 
 Router.get('/',applyController.getStudents)
 
+Router.get('/student',applyController.getCompanies)
 
+Router.post('/withdraw',applyController.removeCompany)
 
 module.exports = Router;

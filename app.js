@@ -3,23 +3,51 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path')
 const mongoose = require('mongoose');
+const multer = require('multer')
 const app = express();
 var cors = require('cors');
 app.use(cors());
-
-
-
-app.use(express.json());
 
 const studentRouter = require('./Routes/student');
 const companyRouter = require('./Routes/company');
 const authRouter = require('./Routes/auth');
 const applyRouter = require('./Routes/apply');
 
+app.use(express.json());
+
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, 'xd' + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  console.log(file)
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+
+
+
 //Set The Application with these middlewares
 
 app.use(bodyParser.json());
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
+);
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
 
 mongoose.connect(process.env.DATABASE_URL,{ useNewUrlParser: true ,  useUnifiedTopology: true });
 const db = mongoose.connection;

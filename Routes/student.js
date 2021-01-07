@@ -56,6 +56,12 @@ Router.get('/:id',getStudent,(req,res,next)=>
 //Updating 1
 Router.post('/:id',getStudent,async(req,res,next)=>
 {
+
+    if (!req.file) {
+        const error = new Error('No image provided.');
+        error.statusCode = 422;
+        throw error;
+      }
     res.student.name =req.body.name
     res.student.cgpa=req.body.cgpa,
     res.student.branch=req.body.branch,
@@ -67,7 +73,7 @@ Router.post('/:id',getStudent,async(req,res,next)=>
     res.student.gender=req.body.gender,
     res.student.diplomaPercentage=req.body.diplomaPercentage,
     res.student.semester=req.body.semseter
-
+    res.imageUrl = req.file.path
 
     try
     {

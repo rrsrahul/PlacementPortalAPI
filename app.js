@@ -5,6 +5,7 @@ const path = require('path')
 const mongoose = require('mongoose');
 const multer = require('multer')
 const app = express();
+const { v4: uuidv4 } = require('uuid');
 var cors = require('cors');
 app.use(cors());
 
@@ -20,7 +21,7 @@ const fileStorage = multer.diskStorage({
     cb(null, 'uploads');
   },
   filename: (req, file, cb) => {
-    cb(null, 'xd' + file.originalname);
+    cb(null, uuidv4())
   }
 });
 

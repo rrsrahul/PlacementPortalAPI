@@ -1,6 +1,8 @@
 const Applied = require('../Models/Applied');
 const Company = require('../Models/company');
 const Student = require('../Models/student');
+const path = require('path')
+const ObjectsToCsv = require('objects-to-csv');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -59,13 +61,41 @@ exports.getStudents = async(req,res,next)=>
 {
     const companyName = req.query.name
     const position = req.query.position
-    
+    console.log('Getting CSV')
     try
     {
         //console.log(companyName)
-       const result = await Applied.find({name:companyName,position:position}).populate()
+       const result = await Applied.find({name:companyName,position:position}).populate('id')
+        let csvData = [];
+        csvData = result.map( student =>{
+            return {
+                Name:student.id.name,
+                USN:student.id.usn,
+                Semester:student.id.semester,
+                Branch:student.id.branch,
+                Email:student.id.email,
+                cgpa:student.id.cgpa,
+                Address:student.id.address,
+                dob:student.id.dob,
+                PhoneNo:student.id.phone,
+                TenthGrade:student.id.tenthMarks,
+                TwelfthMarks:student.id.twelfthMarks,
+                DiplomaPercentage:student.id.diplomaPercentage,
+                Backlogs:student.id.backlogs,
+                BacklogsCleared:student.id.backlogsCleared
+            }
+        })
+
+        //console.log(csvData)
+       const csv = new ObjectsToCsv(csvData);
+       let savePath = path.join(__dirname, 'savedData')
+       //savePath+=companyName + position +'.csv'
+       //console.log(savePath);
+       await csv.toDisk('./savedData/'+companyName+position+'.csv')
+       res.download('./savedData/'+companyName+position+'.csv')
+
       
-       res.send(result);
+       //res.send(result);
       // const result2 = await Applied.find()
        //console.log(result2)
        //res.status(201).json({})

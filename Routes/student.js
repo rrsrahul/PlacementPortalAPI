@@ -57,11 +57,13 @@ Router.get('/:id',getStudent,(req,res,next)=>
 Router.post('/:id',getStudent,async(req,res,next)=>
 {
 
-    if (!req.file) {
-        const error = new Error('No image provided.');
-        error.statusCode = 422;
-        throw error;
-      }
+    if (req.file) {
+        res.student.imageUrl = req.file.path
+    }
+    else if(!res.student.imageUrl)
+    {
+        res.student.imageUrl = 'uploads/default.jpg'
+    }
     res.student.name =req.body.name
     res.student.cgpa=req.body.cgpa,
     res.student.branch=req.body.branch,
@@ -72,9 +74,10 @@ Router.post('/:id',getStudent,async(req,res,next)=>
     res.student.dob=req.body.dob,
     res.student.gender=req.body.gender,
     res.student.diplomaPercentage=req.body.diplomaPercentage,
-    res.student.semester=req.body.semseter
-    res.student.imageUrl = req.file.path
-    console.log(req.file.path)
+    res.student.semester=req.body.semester
+    res.student.backlogs=req.body.backlogs
+    res.student.backlogsCleared=req.body.backlogsCleared   
+    res.student.usn=req.body.usn
 
     try
     {

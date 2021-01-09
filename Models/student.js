@@ -10,6 +10,9 @@ const studentSchema = new Schema({
     type:String,
 
   },
+  usn:{
+    type:String
+  },
   password:
   {
     type:String
@@ -47,8 +50,13 @@ const studentSchema = new Schema({
   },
   semester:
   {
-      type:Number,
-      
+      type:Number,   
+  },
+  backlogs:{
+    type:String
+  },
+  backlogsCleared:{
+    type:String
   },
   resume:
   {
@@ -58,8 +66,6 @@ const studentSchema = new Schema({
   {
     type:String
   }
-
-
 })
 
 module.exports = mongoose.model('Student', studentSchema);

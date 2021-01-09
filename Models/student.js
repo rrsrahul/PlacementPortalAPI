@@ -53,6 +53,10 @@ const studentSchema = new Schema({
   resume:
   {
     type:String
+  },
+  imageUrl:
+  {
+    type:String
   }
 
 

@@ -1,12 +1,9 @@
 const Company = require('../Models/company');
 
-
-
-
 exports.getCompanies = async(req,res,next)=>
 {
     try{
-        const companies = await Company.find();
+        const companies = await Company.find().sort({date:'asc'});
         res.status(200).json(companies)
     }
     catch(err){

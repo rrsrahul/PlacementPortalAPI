@@ -20,7 +20,6 @@ const companySchema = new Schema({
     jobLocation:{
         type:String
     },
-
     date:
     {
         type:Date

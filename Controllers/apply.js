@@ -2,8 +2,6 @@ const Applied = require('../Models/Applied');
 const Company = require('../Models/company');
 const Student = require('../Models/student');
 const mongoose = require('mongoose');
-const { json } = require('body-parser');
-const { findOneAndRemove } = require('../Models/Applied');
 require('dotenv').config();
 
 exports.applyCompany = async(req,res,next)=>
@@ -86,11 +84,9 @@ exports.removeCompany = async(req,res,next)=>
     const compName = req.body.compName;
     const userId = mongoose.Types.ObjectId(req.body.id)
     const position = req.body.position
-    console.log(compName);
     try
     {
          const result = await Applied.findOneAndDelete({name:compName,id:userId,position:position})
-         console.log(result)
 
             if(!result)
             {
@@ -113,7 +109,6 @@ exports.removeCompany = async(req,res,next)=>
 exports.getCompanies = async(req,res,next)=>
 {
     const userId = mongoose.Types.ObjectId(req.query.userId)
-    console.log(userId)
 
     try
     {

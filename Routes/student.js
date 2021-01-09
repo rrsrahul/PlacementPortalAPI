@@ -73,7 +73,8 @@ Router.post('/:id',getStudent,async(req,res,next)=>
     res.student.gender=req.body.gender,
     res.student.diplomaPercentage=req.body.diplomaPercentage,
     res.student.semester=req.body.semseter
-    res.imageUrl = req.file.path
+    res.student.imageUrl = req.file.path
+    console.log(req.file.path)
 
     try
     {

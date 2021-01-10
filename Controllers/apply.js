@@ -41,8 +41,8 @@ exports.applyCompany = async(req,res,next)=>
         if(parseFloat(student.cgpa)<parseFloat(company.eligibility))
         {
             const e = new Error('Cgpa is lesser than the Cutoff needed, Try again ')
-            e.statusCode = 400
-            throw error;
+            e.statusCode = 500;
+            throw e;
         }
 
             const appliedStudent = await apply.save();
@@ -51,8 +51,10 @@ exports.applyCompany = async(req,res,next)=>
     }
     catch(err)
     {
-        console.log(err)
-        next(err)
+        if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
     }
 
 }
@@ -88,9 +90,9 @@ exports.getStudents = async(req,res,next)=>
 
         //console.log(csvData)
        const csv = new ObjectsToCsv(csvData);
-       let savePath = path.join(__dirname, 'savedData')
+       //let savePath = path.join(__dirname, 'savedData')
        //savePath+=companyName + position +'.csv'
-       //console.log(savePath);
+       console.log('Saving CSV');
        await csv.toDisk('./savedData/'+companyName+position+'.csv')
        res.download('./savedData/'+companyName+position+'.csv')
 
@@ -103,8 +105,10 @@ exports.getStudents = async(req,res,next)=>
     catch(err)
     {   
         
-        console.log(err)
-        next(err)
+        if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
     }
    
 }

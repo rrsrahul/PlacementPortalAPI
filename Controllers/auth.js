@@ -48,16 +48,26 @@ exports.login = async(req,res,next)=>
     try
     {
         const student = await Student.findOne({email:email});
+        if(password.length<7)
+        {
+            const error = new Error('Password too short');
+            error.statusCode = 401;    
+            throw error;
+        }
         if(!student)
         {
-            res.status(404).json({message:'Could not Find User'});
+            const error = new Error('Wrong Email or Password');
+            error.statusCode = 404;    
+            throw error;
 
         }
         loadedStudent = student;
         const isEqual = await bcrypt.compare(password, student.password);
         if(!isEqual)
         {
-            res.status(400).json({message:'Passwords not matching'});
+            const error = new Error('Wrong Email or Password');
+            error.statusCode = 400;    
+            throw error;
         }
         const token = jwt.sign(
             {
@@ -68,9 +78,10 @@ exports.login = async(req,res,next)=>
             {expiresIn: '1h' }
 
         );
-
+            
         res.status(200).json({ token: token, userId: loadedStudent._id.toString(),
-            userData:{...loadedStudent._doc,password:null}
+            userData:{...loadedStudent._doc,password:null},
+            isAdmin:loadedStudent._doc.isAdmin
          });
 
     }

@@ -53,13 +53,13 @@ exports.createCompany = async(req,res,next)=>
 
         const comp = await Company.findOne({ name:req.body.name,position:req.body.position });
         if (comp) {
-            const error = new Error('A Company with this Name and Job Description Already exists already exists');
+            const error = new Error('A Company with this Name and Job Description Already exists');
             error.statusCode = 401;    
             throw error;
-    }
-
-
+        }
         const newCompany = await company.save();
+        
+        
         res.status(201).json(newCompany);
         
     }

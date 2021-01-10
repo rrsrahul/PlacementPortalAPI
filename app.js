@@ -88,8 +88,8 @@ app.use('/admin',authRouter);
 app.use('/apply',applyRouter);
 
 app.use((error, req, res, next) => {
-  console.log(error);
   const status = error.statusCode || 500;
+  //console.log('in Error Handler')
   const message = error.message;
   const data = error.data;
   res.status(status).json({ message: message, data: data });

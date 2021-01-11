@@ -1,4 +1,9 @@
 const Company = require('../Models/company');
+const mongoose = require('mongoose')
+
+const nodemailer = require("nodemailer")
+const Student = require('../Models/student');
+require('dotenv').config();
 
 exports.getCompanies = async(req,res,next)=>
 {
@@ -57,6 +62,33 @@ exports.createCompany = async(req,res,next)=>
             error.statusCode = 401;    
             throw error;
         }
+
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'rahulrsgoku@gmail.com',
+              pass: process.env.password
+            }
+          })
+
+          const students = await Student.find();
+
+         students.forEach(student => {
+           let mailOptions = {
+                from: 'rahulrsgoku@gmail.com',
+                to: student.email,
+                subject: 'Notification regarding '+req.body.name,
+                text: req.body.name + 'Just registered for placements in BMSCE. Get ready to check more details and Apply on the Campus portal'
+              };
+
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }});})
+          
+
         const newCompany = await company.save();
         
         
@@ -100,7 +132,7 @@ exports.updateCompany = async(req,res,next)=>
 
 exports.deleteCompany = async(req,res,next)=>
 {
-    const id = req.params.id;
+    const id = mongoose.Types.ObjectId(req.params.id);
     try
     {
         const company = await Company.findById(id);
@@ -108,8 +140,10 @@ exports.deleteCompany = async(req,res,next)=>
         {
             return res.status(404).json({message:'Company not Found'});
         }
+        console.log(company)
         //await Company.findByIdAndRemove(id);
-        await Company.findOneAndDelete(id);
+        await Company.findOneAndDelete({_id:id});
+    
         res.json({message:'Deleted the Company',name:company.name});
         
         

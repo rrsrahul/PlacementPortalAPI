@@ -6,7 +6,7 @@ require('dotenv').config();
 exports.signup = async(req,res,next)=>
 {
     const email = req.body.email;
-    const name = req.body.name || 'Rahul';
+    const name = req.body.name || 'Name';
     const password = req.body.password;
 try
 {

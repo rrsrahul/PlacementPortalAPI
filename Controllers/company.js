@@ -77,10 +77,10 @@ exports.createCompany = async(req,res,next)=>
            let mailOptions = {
                 from: 'rahulrsgoku@gmail.com',
                 to: student.email,
-                subject: 'Notification regarding '+req.body.name,
-                text: req.body.name + 'Just registered for placements in BMSCE. Get ready to check more details and Apply on the Campus portal'
+                subject: 'Notification regarding '+ req.body.name,
+                text: 'Dear Student,\nThe Placement department is glad to announce that ' + req.body.name + ' is coming with a placement offer for students. Please check \n the campus placement portal for further details and to apply \nPlacement Department'
               };
-
++
               transporter.sendMail(mailOptions, function(error, info){
                 if (error) {
                   console.log(error);
